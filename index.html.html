@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>כפר הים - פרויקט השקעה בפאפוס</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0A1E36; /* כחול כהה מהרפרנס */
+            --accent-gold: #C49A6C; /* צבע זהב/ברונזה לכפתורים */
+            --accent-gold-hover: #A8845A;
+            --light-bg: #F5F5F5; /* רקע אפור בהיר */
+            --text-dark: #222222;
+            --text-light: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #fff;
+            text-align: right; /* הבטחת יישור לימין גלובלי */
+        }
+
+        /* מחלקות עזר כלליות */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .text-center { text-align: center; }
+        .bold { font-weight: 700; }
+        .highlight { color: var(--accent-gold); font-weight: 900; }
+
+        h1, h2, h3 { font-weight: 900; margin-bottom: 20px; line-height: 1.2; }
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; color: var(--primary-dark); }
+        h3 { font-size: 1.5rem; }
+        p { margin-bottom: 20px; font-size: 1.1rem; }
+
+        /* Image Styles */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 30px auto;
+            border-radius: 8px;
+        }
+        
+        .hero-image {
+            width: 100%;
+            max-height: 600px;
+            object-fit: cover;
+            margin-bottom: 0; /* הצמדה לסקשן שמתחת */
+            border-radius: 0;
+        }
+
+        .tovia-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid var(--accent-gold);
+        }
+
+        .banner-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            margin-top: 40px;
+            border-radius: 0;
+        }
+        
+        /* New style for step tiles */
+        .step-tile-image {
+            max-width: 500px; /* גודל מקסימלי לכל אריח */
+            width: 100%;
+            margin-bottom: 30px; /* רווח בין התמונות */
+        }
+
+        /* Sections */
+        section { padding: 60px 0; }
+        section.dark-bg { background-color: var(--primary-dark); color: var(--text-light); }
+        section.dark-bg h2 { color: var(--text-light); }
+        section.light-bg { background-color: var(--light-bg); }
+
+        /* Hero Section */
+        .hero-section {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            padding-top: 0;
+            padding-bottom: 60px;
+        }
+        .hero-content {
+            padding: 40px 20px 0 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Qualification Section */
+        .qualification-box {
+            border: 3px solid var(--accent-gold);
+            padding: 30px;
+            background-color: #fff;
+            color: var(--text-dark);
+            border-radius: 8px;
+        }
+
+        /* Data List */
+        .data-list { list-style: none; padding: 0; max-width: 600px; margin: 0 auto; }
+        .data-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+            font-size: 1.2rem;
+        }
+        .data-list li strong { color: var(--primary-dark); }
+        /* הבלטה מיוחדת לשורת המחיר */
+        .data-list li.super-highlight {
+            color: var(--accent-gold);
+            font-weight: 900;
+            font-size: 1.4rem;
+            padding: 20px 0;
+        }
+        .data-list li.super-highlight strong {
+            color: var(--accent-gold);
+        }
+
+
+        /* Target Audience (Lists) */
+        .audience-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        .audience-col { flex: 1; min-width: 300px; }
+        .audience-col h3 { color: var(--accent-gold); margin-bottom: 20px;}
+        .check-list li, .cross-list li {
+            margin-bottom: 15px;
+            padding-right: 30px;
+            position: relative;
+        }
+        .check-list li::before {
+            content: '✓';
+            color: var(--accent-gold);
+            position: absolute;
+            right: 0;
+            font-weight: bold;
+        }
+        .cross-list li::before {
+            content: '✕';
+            color: #d9534f;
+            position: absolute;
+            right: 0;
+            font-weight: bold;
+        }
+
+        /* FAQ */
+        .faq-item { margin-bottom: 25px; }
+        .faq-question { font-weight: bold; font-size: 1.2rem; color: var(--primary-dark); margin-bottom: 10px; }
+
+        /* Form Section */
+        .form-section { background-color: var(--primary-dark); color: var(--text-light); padding-bottom: 0; }
+        .form-container { max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 40px; border-radius: 8px; border: 1px solid var(--accent-gold); }
+        .form-group { margin-bottom: 20px; text-align: right; }
+        .form-label { display: block; margin-bottom: 8px; font-weight: bold; }
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: 'Heebo', sans-serif;
+            background-color: #fff; /* Ensure selects have white bg */
+            text-align: right; /* יישור טקסט בתוך השדות */
+        }
+        .form-input:focus { outline: none; border-color: var(--accent-gold); }
+        
+        /* Button */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-gold);
+            color: var(--text-light);
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            width: 100%;
+            text-align: center;
+        }
+        .cta-button:hover { background-color: var(--accent-gold-hover); }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.7rem; }
+            .container { padding: 30px 15px; }
+            .audience-grid { flex-direction: column; gap: 20px; }
+            .data-list li.super-highlight { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero-section">
+        <img src="hero_sunset.png" alt="חזית פרויקט כפר הים בשקיעה" class="hero-image">
+
+        <div class="hero-content">
+            <h1>כמה זמן עוד אתה מתכנן לשבת על הכסף הזה?</h1>
+            <p class="bold">אתה יודע בדיוק על מה אני מדבר</p>
+            <p>ההון שעומד שם כבר חודשים, אולי שנים, ואתה אומר לעצמך שאתה מחכה לרגע הנכון. אבל שנינו יודעים שהרגע הנכון לא מגיע לבד.<br>
+            הוא מגיע כשמחליטים.</p>
+            <p>אנחנו לא מחפשים "מתעניינים".<br>
+            אנחנו מחפשים משקיעים, ציידי נדל"ן אמיתיים, שמסוגלים לקבל החלטה בתוך חלון זמן קצר, בלי להתייעץ עם עוד חמישה אנשים, בלי "לחזור אחרי החגים", בלי לבקש עוד שבוע לחשוב.</p>
+            <p class="bold" style="margin-top: 30px;">אם זה לא אתה, אפשר לסגור את הדף עכשיו. באמת, בלי בעיה. המהלך הזה לא מתאים לכולם.</p>
+        </div>
+    </section>
+
+    <section class="light-bg text-center">
+        <div class="container">
+            <h2>עדיין פה?</h2>
+            <p style="font-size: 1.2rem;">אתה כנראה באמת מחפש השקעה בנדל"ן בחו"ל.</p>
+            <p class="bold" style="font-size: 1.3rem;">נשארו <span class="highlight">11 דירות</span>, במחירי קדם פריסייל.</p>
+            <p>בפרויקט כפר הים, ליד פאפוס, 800 מטר מהים, 5 דקות משדה התעופה, 40 דקות טיסה מישראל.</p>
+            <p class="bold">עם תום מכירת 11 היחידות האלו, המחירים עולים ב-12% ואין הזדמנות שניה.</p>
+        </div>
+    </section>
+
+    <section class="dark-bg text-center">
+        <div class="container">
+            <img src="interior_man.png" alt="הדמיית פנים דירה מול הים" style="max-width: 800px;">
+            
+            <div class="qualification-box">
+                <h2 style="color: var(--primary-dark);">בוא נבדוק משהו</h2>
+                <p class="bold" style="font-size: 1.4rem;">יש לך עכשיו הון עצמי של לפחות 110,000 יורו, זמין למהלך?</p>
+                <p>אם התשובה היא לא, או "צריך לבדוק", או "תלוי", הדף הזה לא בשבילך ואין טעם להמשיך לקרוא.</p>
+                <p class="bold highlight">אם התשובה היא כן, יש לנו מה לדבר..</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="light-bg">
+        <div class="container">
+            <h2>למה אנשים נתקעים</h2>
+            <p>לא כי אין להם כסף ולא כי אין הזדמנויות.</p>
+            <p>אלא כי הם ראו יותר מדי אנשים חכמים שעשו טעויות יקרות. ראו חברים שקפצו על "הזדמנויות" שהתבררו כהרפתקאות. ראו קרובי משפחה שהאמינו למצגות מבריקות והפסידו כסף.</p>
+            <p>אז הם מחכים, בודקים, משווים, מתייעצים ובסוף לא עושים כלום.<br>
+            כי הזהירות שלמדו מניסיון, הפכה לשיתוק שעולה להם בדיוק כמו פזיזות, רק בצורה שקטה יותר.</p>
+
+            <h2 style="margin-top: 50px;">אז מה שונה פה?</h2>
+            <p>שום דבר מיוחד חוץ מזה שאנחנו לא מנסים לשכנע אותך.</p>
+            <p>יש פרויקט. יש מספרים. יש חלון זמן ויש תהליך בדיקה שמאפשר לך להחליט אם זה מתאים לך.<br>
+            לא "הזדמנות חד פעמית", לא "עכשיו או לעולם לא". פשוט עסקה שהגיונית למי שמסוגל לזוז.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container text-center">
+            <img src="pool_twilight.png" alt="בריכת הפרויקט בשעת בין ערביים" style="max-width: 900px;">
+
+            <h2>הפרויקט</h2>
+            <p class="bold" style="font-size: 1.3rem;">כפר הים, ליד פאפוס, קפריסין.</p>
+            <p>קומפלקס חדש, בריכה, לובי, חניה פרטית, מפרט אירופי גבוה, ניהול מלא בשטח, אזור עם ביקוש אמיתי לשכירות כל השנה.</p>
+
+            <img src="map_location.png" alt="מפת מיקום הפרויקט בפאפוס" style="max-width: 800px; margin-top: 40px;">
+        </div>
+    </section>
+
+    <section class="light-bg text-center">
+        <div class="container">
+            <h2>המספרים</h2>
+            <ul class="data-list">
+                <li>מחיר יחידה: <strong>כ-220,000 יורו + מע"מ</strong></li>
+                <li>הון עצמי נדרש: <strong>כ-110,000 יורו</strong></li>
+                <li class="super-highlight">דמי שריון דירה, מיידי: <strong>5,000 יורו בלבד</strong></li>
+                <li>שכירות ארוכת טווח: <strong>11,000 עד 14,000 יורו בשנה</strong></li>
+                <li>שכירות קצרה Airbnb: <strong>כ 21,000 עד 26,000 יורו בשנה</strong></li>
+                <li>תפוסה ממוצעת באזור: <strong>61% עד 73%</strong></li>
+                <li>עליית ערך צפויה עם סיום הבניה: <strong>12%</strong></li>
+            </ul>
+            <p class="bold" style="margin-top: 30px;">אלו לא הבטחות, אלו מספרים שאפשר לאמת ואם משהו לא מסתדר לך, עדיף שתגלה את זה עכשיו.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <img src="money_growth.png" alt="הדמיית צמיחת ערך ההשקעה" style="max-width: 800px;">
+        </div>
+    </section>
+
+    <section class="dark-bg">
+        <div class="container">
+            <div class="audience-grid">
+                <div class="audience-col">
+                    <h3>למי זה באמת מתאים</h3>
+                    <ul class="check-list">
+                        <li>למי שיש לו הון שעומד ויודע שהוא צריך לזוז</li>
+                        <li>למי שרוצה לגור בחו"ל ומחפש עוגן קרוב למשפחה בישראל</li>
+                        <li>למי שנמאס לו לשלם מחירי שיא על חופשות ורוצה מקום משלו</li>
+                    </ul>
+                </div>
+                <div class="audience-col">
+                    <h3>למי זה לא מתאים</h3>
+                    <ul class="cross-list">
+                        <li>למי שצריך להתייעץ עם עוד עשרה אנשים, לפני שהוא מחליט</li>
+                        <li>למי שמחפש "עוד מידע", במקום לקבל החלטה</li>
+                        <li>למי שההון העצמי שלו לא זמין או לא ברור</li>
+                        <li>למי שרוצה "לחשוב על זה אחרי החגים"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="light-bg text-center">
+        <div class="container">
+            <h2>איך התהליך עובד</h2>
+            
+            <div style="margin-top: 40px;">
+                <img src="step1_tile.png" alt="שלב 1: שיחת התאמה" class="step-tile-image">
+                <img src="step2_tile.png" alt="שלב 2: זום עם נתונים" class="step-tile-image">
+                <img src="step3_tile.png" alt="שלב 3: החלטה" class="step-tile-image">
+            </div>
+
+        </div>
+    </section>
+
+    <section class="text-center">
+        <div class="container">
+            <h2>מי עומד מאחורי זה</h2>
+            <img src="tovia_circle.png" alt="טוביה מרמרלי" class="tovia-img">
+            <p class="bold" style="font-size: 1.3rem;">אני טוביה מרמרלי (הנדלנומטר).</p>
+            <p>מסנן פרויקטים, לא מוכר אותם<br>
+            הפרויקט הזה עבר את הבדיקה שלי ולכן אני מציג אותו<br>
+            אם הוא לא היה עובר, לא היית רואה את הדף הזה</p>
+        </div>
+    </section>
+
+    <section class="form-section text-center">
+        <div class="container">
+            <img src="hero_sunset.png" alt="כפר הים בשקיעה" style="max-width: 800px; border-radius: 8px; border: 3px solid var(--accent-gold);">
+
+            <h2 style="color: var(--accent-gold); font-size: 3rem; margin-top: 30px;">11 דירות</h2>
+            <p class="bold" style="font-size: 1.5rem;">לא 160. לא 50. רק 11</p>
+            <p>מי שמתאים ומוכן לזוז עכשיו, משאיר פרטים.<br>
+            מי שלא, ממשיך הלאה בלי דרמה.</p>
+            
+            <div style="margin: 40px 0;">
+                <h3 style="color: var(--accent-gold);">שיחת התאמה להתקדמות</h3>
+                <p>7 דקות. 4 שאלות. אנחנו בודקים התאמה, לא מנסים לשכנע</p>
+            </div>
+
+            <div class="form-container">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">שם מלא</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">טלפון</label>
+                        <input type="tel" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">דוא"ל</label>
+                        <input type="email" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">שאלה אחת: למה קפריסין?</label>
+                        <select class="form-input" required>
+                            <option value="">בחר תשובה...</option>
+                            <option value="רילוקיישן 40 דקות מכאן">רילוקיישן 40 דקות מכאן</option>
+                            <option value="נכס להשקעה">נכס להשקעה</option>
+                            <option value="דירה לחופש, בלי לשלם למלון">דירה לחופש, בלי לשלם למלון</option>
+                            <option value="דירת חופש + השכרה לטווח קצר">דירת חופש + השכרה לטווח קצר</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">שאלה שנייה: הסכום של 110,000 יורו זמין לך להשקעה?</label>
+                        <select class="form-input" required>
+                            <option value="">בחר תשובה...</option>
+                            <option value="כן, בטח. בגלל זה נרשמתי">כן, בטח. בגלל זה נרשמתי</option>
+                            <option value="לא זמין, אבל קיים">לא זמין, אבל קיים</option>
+                            <option value="לצערי לא. אני רק מתעניין">לצערי לא. אני רק מתעניין</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">שאלה שלישית: אתה כבר יודע מה נדרש לרכישת נכס בקפריסין?</label>
+                        <select class="form-input" required>
+                            <option value="">בחר תשובה...</option>
+                            <option value="בטח. כבר עשיתי מחקר רציני">בטח. כבר עשיתי מחקר רציני</option>
+                            <option value="קראתי קצת, אבל לא בדיוק">קראתי קצת, אבל לא בדיוק</option>
+                            <option value="אין לי מושג">אין לי מושג</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="cta-button">אני רוצה לבדוק השקעה מיידית בקפריסין</button>
+                </form>
+            </div>
+
+            <div style="background-color: var(--light-bg); color: var(--text-dark); padding: 40px; border-radius: 8px; margin: 60px auto; max-width: 800px; text-align: right;">
+                <h2 class="text-center" style="color: var(--primary-dark);">שאלות ותשובות</h2>
+                <div class="faq-item">
+                    <div class="faq-question">האם ה-5,000 יורו מחייבים אותי?</div>
+                    <p>לא. זו שמירת מחיר.</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">מה קורה אם אני מחכה?</div>
+                    <p>המחיר עולה ב-12% עם סיום מכירת 11 היחידות. זה לא איום, זו מציאות.</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">אני צריך ניסיון בנדל"ן בחו"ל?</div>
+                    <p>לא. אתה צריך יכולת החלטה.</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">כמה הון עצמי נדרש?</div>
+                    <p>כ-110,000 יורו. את השאר משלימים עם משכנתה בתנאים מצוינים. אם זה לא בטווח שלך, זה לא המהלך בשבילך.</p>
+                </div>
+            </div>
+
+            <div style="margin: 50px 0;">
+                <a href="#" class="cta-button" style="max-width: 500px; width: 100%; display: inline-block;">השתכנעתי, אני רוצה שיחה קצרה</a>
+            </div>
+
+             <img src="bottom_banner.png" alt="באנר פרויקט כפר הים" class="banner-image">
+
+        </div>
+    </section>
+
+</body>
+</html>
