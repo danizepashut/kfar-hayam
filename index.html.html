@@ -7,34 +7,64 @@
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-dark: #0A1E36; /* כחול כהה מהרפרנס */
-            --accent-gold: #C49A6C; /* צבע זהב/ברונזה לכפתורים */
+            --primary-dark: #0A1E36;
+            --accent-gold: #C49A6C;
             --accent-gold-hover: #A8845A;
-            --light-bg: #F5F5F5; /* רקע אפור בהיר */
+            --light-bg: #F5F5F5;
             --text-dark: #222222;
             --text-light: #ffffff;
+            --placeholder-gray: #dddddd; /* צבע עבור המוקאפים */
         }
 
-        * {
+        /* --- איפוס בסיסי ונקי (Clean Reset) --- */
+        
+        /* 1. הגדרת מודל קופסה - קריטי לרספונסיביות */
+        *, *::before, *::after {
             box-sizing: border-box;
+        }
+
+        /* 2. איפוס שוליים ברירת מחדל */
+        body, h1, h2, h3, p, ul, li, figure, blockquote, dl, dd {
             margin: 0;
             padding: 0;
         }
 
-        body {
+        /* 3. הגדרות גוף הדף */
+        html, body {
+            width: 100%;
+            /* מניעת גלילה אופקית ברמה הגבוהה ביותר בלבד */
+            overflow-x: hidden; 
+            margin: 0;
+            padding: 0;
             font-family: 'Heebo', sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
             background-color: #fff;
-            text-align: right; /* הבטחת יישור לימין גלובלי */
+            text-align: right;
+            direction: rtl;
         }
 
-        /* מחלקות עזר כלליות */
+        /* 4. חוק יסוד: אלמנטים לא יחרגו מרוחב המיכל שלהם */
+        img, video, canvas, svg, iframe {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* טיפול בטקסטים ארוכים שעלולים לשבור שורה */
+        p, h1, h2, h3, li {
+            overflow-wrap: break-word;
+        }
+
+        /* --- סוף איפוס --- */
+
+
+        /* מחלקות עזר */
         .container {
-            width: 90%;
-            max-width: 1100px;
+            width: 100%;
+            max-width: 1100px; /* רוחב מקסימלי במחשב */
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 40px 20px; /* מרווח פנימי בטוח */
         }
 
         .text-center { text-align: center; }
@@ -47,22 +77,22 @@
         h3 { font-size: 1.5rem; }
         p { margin-bottom: 20px; font-size: 1.1rem; }
 
-        /* Image Styles */
+        /* סגנונות תמונות */
         img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto 30px auto;
             border-radius: 8px;
+            margin: 0 auto 30px auto;
         }
-        
-        .hero-image {
+
+        /* תמונות ברוחב מלא */
+        .hero-image, .banner-image {
             width: 100%;
             max-height: 600px;
             object-fit: cover;
-            margin-bottom: 0; /* הצמדה לסקשן שמתחת */
+            margin-bottom: 0;
             border-radius: 0;
         }
+        
+        .banner-image { margin-top: 40px; max-height: 400px; }
 
         .tovia-img {
             width: 200px;
@@ -71,43 +101,41 @@
             margin-bottom: 20px;
             border: 3px solid var(--accent-gold);
         }
+        
+        .step-tile-image { width: 100%; }
 
-        .banner-image {
+        /* סקשנים */
+        section {
             width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-            margin-top: 40px;
-            border-radius: 0;
         }
         
-        /* New style for step tiles */
-        .step-tile-image {
-            max-width: 500px; /* גודל מקסימלי לכל אריח */
-            width: 100%;
-            margin-bottom: 30px; /* רווח בין התמונות */
+        /* סקשנים עם ריפוד */
+        section.padded-section {
+            padding: 60px 0;
         }
 
-        /* Sections */
-        section { padding: 60px 0; }
+        /* רקעים */
         section.dark-bg { background-color: var(--primary-dark); color: var(--text-light); }
         section.dark-bg h2 { color: var(--text-light); }
         section.light-bg { background-color: var(--light-bg); }
 
         /* Hero Section */
         .hero-section {
-            background-color: var(--primary-dark);
+            padding: 0; 
+            background-color: var(--primary-dark); 
             color: var(--text-light);
-            padding-top: 0;
-            padding-bottom: 60px;
+        }
+        .hero-content-wrapper {
+            padding: 60px 0;
         }
         .hero-content {
-            padding: 40px 20px 0 20px;
+            padding: 0 20px;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
         }
 
-        /* Qualification Section */
+        /* Qualification Box */
         .qualification-box {
             border: 3px solid var(--accent-gold);
             padding: 30px;
@@ -116,101 +144,91 @@
             border-radius: 8px;
         }
 
-        /* Data List */
-        .data-list { list-style: none; padding: 0; max-width: 600px; margin: 0 auto; }
-        .data-list li {
-            padding: 15px 0;
-            border-bottom: 1px solid #ddd;
-            font-size: 1.2rem;
-        }
+        /* Lists */
+        .data-list { list-style: none; max-width: 600px; margin: 0 auto; width: 100%; }
+        .data-list li { padding: 15px 0; border-bottom: 1px solid #ddd; font-size: 1.2rem; }
         .data-list li strong { color: var(--primary-dark); }
-        /* הבלטה מיוחדת לשורת המחיר */
-        .data-list li.super-highlight {
-            color: var(--accent-gold);
-            font-weight: 900;
-            font-size: 1.4rem;
-            padding: 20px 0;
-        }
-        .data-list li.super-highlight strong {
-            color: var(--accent-gold);
-        }
+        .data-list li.super-highlight { color: var(--accent-gold); font-weight: 900; font-size: 1.4rem; padding: 20px 0; }
+        .data-list li.super-highlight strong { color: var(--accent-gold); }
 
-
-        /* Target Audience (Lists) */
-        .audience-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-top: 40px;
-        }
-        .audience-col { flex: 1; min-width: 300px; }
+        /* Audience Grid */
+        .audience-grid { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 40px; width: 100%; }
+        .audience-col { flex: 1 1 300px; }
         .audience-col h3 { color: var(--accent-gold); margin-bottom: 20px;}
-        .check-list li, .cross-list li {
-            margin-bottom: 15px;
-            padding-right: 30px;
-            position: relative;
-        }
-        .check-list li::before {
-            content: '✓';
-            color: var(--accent-gold);
-            position: absolute;
-            right: 0;
-            font-weight: bold;
-        }
-        .cross-list li::before {
-            content: '✕';
-            color: #d9534f;
-            position: absolute;
-            right: 0;
-            font-weight: bold;
-        }
+        .check-list li, .cross-list li { margin-bottom: 15px; padding-right: 30px; position: relative; }
+        .check-list li::before { content: '✓'; color: var(--accent-gold); position: absolute; right: 0; font-weight: bold; }
+        .cross-list li::before { content: '✕'; color: #d9534f; position: absolute; right: 0; font-weight: bold; }
 
-        /* FAQ */
+        /* FAQ & Form */
         .faq-item { margin-bottom: 25px; }
         .faq-question { font-weight: bold; font-size: 1.2rem; color: var(--primary-dark); margin-bottom: 10px; }
-
-        /* Form Section */
-        .form-section { background-color: var(--primary-dark); color: var(--text-light); padding-bottom: 0; }
-        .form-container { max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 40px; border-radius: 8px; border: 1px solid var(--accent-gold); }
+        
+        .form-section { padding-bottom: 0; }
+        .form-container { max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 40px; border-radius: 8px; border: 1px solid var(--accent-gold); width: 100%; }
         .form-group { margin-bottom: 20px; text-align: right; }
         .form-label { display: block; margin-bottom: 8px; font-weight: bold; }
-        .form-input {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-family: 'Heebo', sans-serif;
-            background-color: #fff; /* Ensure selects have white bg */
-            text-align: right; /* יישור טקסט בתוך השדות */
-        }
+        .form-input { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; font-family: 'Heebo', sans-serif; background-color: #fff; text-align: right; }
         .form-input:focus { outline: none; border-color: var(--accent-gold); }
         
         /* Button */
-        .cta-button {
-            display: inline-block;
-            background-color: var(--accent-gold);
-            color: var(--text-light);
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            text-decoration: none;
-            width: 100%;
-            text-align: center;
-        }
+        .cta-button { display: inline-block; background-color: var(--accent-gold); color: var(--text-light); padding: 15px 40px; font-size: 1.2rem; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease; text-decoration: none; width: 100%; text-align: center; }
         .cta-button:hover { background-color: var(--accent-gold-hover); }
 
-        /* Responsive adjustments */
+        /* --- סגנונות חדשים עבור המוקאפים (Placeholders) --- */
+        
+        /* מוקאפ וידאו (יחס 16:9) */
+        .video-placeholder-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: var(--placeholder-gray);
+            border-radius: 8px;
+            padding-bottom: 56.25%; /* טריק ליצירת יחס גובה-רוחב של 16:9 */
+            height: 0;
+        }
+        .video-placeholder-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #666;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* מוקאפ גלריה (גריד רספונסיבי) */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* עמודות גמישות */
+            gap: 20px;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        .gallery-placeholder-item {
+            background-color: var(--placeholder-gray);
+            aspect-ratio: 1 / 1; /* ריבוע */
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-weight: bold;
+        }
+
+
+        /* Responsive Media Queries */
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.7rem; }
-            .container { padding: 30px 15px; }
-            .audience-grid { flex-direction: column; gap: 20px; }
-            .data-list li.super-highlight { font-size: 1.2rem; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.5rem; }
+            section.padded-section, .hero-content-wrapper { padding: 40px 0; }
+            .container { padding: 30px 20px; }
+            .audience-grid { flex-direction: column; gap: 30px; }
+            .audience-col { flex: 1 1 100%; }
+            .form-container, .qualification-box { padding: 25px; }
+            .cta-button { padding: 15px 20px; font-size: 1.1rem; }
+            .tovia-img { width: 150px; height: 150px; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); } /* 2 בשורה במובייל */
         }
     </style>
 </head>
@@ -219,68 +237,70 @@
     <section class="hero-section">
         <img src="hero_sunset.png" alt="חזית פרויקט כפר הים בשקיעה" class="hero-image">
 
-        <div class="hero-content">
-            <h1>כמה זמן עוד אתה מתכנן לשבת על הכסף הזה?</h1>
-            <p class="bold">אתה יודע בדיוק על מה אני מדבר</p>
-            <p>ההון שעומד שם כבר חודשים, אולי שנים, ואתה אומר לעצמך שאתה מחכה לרגע הנכון. אבל שנינו יודעים שהרגע הנכון לא מגיע לבד.<br>
-            הוא מגיע כשמחליטים.</p>
-            <p>אנחנו לא מחפשים "מתעניינים".<br>
-            אנחנו מחפשים משקיעים, ציידי נדל"ן אמיתיים, שמסוגלים לקבל החלטה בתוך חלון זמן קצר, בלי להתייעץ עם עוד חמישה אנשים, בלי "לחזור אחרי החגים", בלי לבקש עוד שבוע לחשוב.</p>
-            <p class="bold" style="margin-top: 30px;">אם זה לא אתה, אפשר לסגור את הדף עכשיו. באמת, בלי בעיה. המהלך הזה לא מתאים לכולם.</p>
+        <div class="hero-content-wrapper">
+            <div class="hero-content">
+                <h1>כמה זמן עוד אתה מתכנן לשבת על הכסף הזה?</h1>
+                <p class="bold">אתה יודע בדיוק על מה אני מדבר.</p>
+                <p>ההון שעומד שם כבר חודשים, אולי שנים, ואתה אומר לעצמך שאתה מחכה לרגע הנכון. אבל שניינו יודעים שהרגע הנכון לא מגיע לבד.<br>
+                הוא מגיע כשמחליטים.</p>
+                <p>אנחנו לא מחפשים "מתעניינים"<br>
+                אנחנו מחפשים משקיעים. ציידי נדל"ן אמיתיים. שמסוגלים לקבל החלטה בתוך חלון זמן קצר. בלי להתייעץ עם עוד חמישה אנשים. בלי "לחזור אחרי החגים". בלי לבקש עוד שבוע לחשוב.</p>
+                <p class="bold" style="margin-top: 30px;">אם זה לא אתה, אפשר לסגור את הדף עכשיו. באמת, בלי בעיה. המהלך הזה לא מתאים לכולם.</p>
+            </div>
         </div>
     </section>
 
-    <section class="light-bg text-center">
+    <section class="light-bg text-center padded-section">
         <div class="container">
             <h2>עדיין פה?</h2>
             <p style="font-size: 1.2rem;">אתה כנראה באמת מחפש השקעה בנדל"ן בחו"ל.</p>
             <p class="bold" style="font-size: 1.3rem;">נשארו <span class="highlight">11 דירות</span>, במחירי קדם פריסייל.</p>
-            <p>בפרויקט כפר הים, ליד פאפוס, 800 מטר מהים, 5 דקות משדה התעופה, 40 דקות טיסה מישראל.</p>
-            <p class="bold">עם תום מכירת 11 היחידות האלו, המחירים עולים ב-12% ואין הזדמנות שניה.</p>
+            <p>בפרויקט כפר הים, ליד פאפוס. 800 מטר מהים. 5 דקות משדה התעופה. 40 דקות טיסה מישראל.</p>
+            <p class="bold">עם תום מכירת 11 היחידות האלו, המחירים עולים ב-12%. ואין הזדמנות שנייה.</p>
         </div>
     </section>
 
-    <section class="dark-bg text-center">
+    <section class="dark-bg text-center padded-section">
         <div class="container">
             <img src="interior_man.png" alt="הדמיית פנים דירה מול הים" style="max-width: 800px;">
             
             <div class="qualification-box">
                 <h2 style="color: var(--primary-dark);">בוא נבדוק משהו</h2>
                 <p class="bold" style="font-size: 1.4rem;">יש לך עכשיו הון עצמי של לפחות 110,000 יורו, זמין למהלך?</p>
-                <p>אם התשובה היא לא, או "צריך לבדוק", או "תלוי", הדף הזה לא בשבילך ואין טעם להמשיך לקרוא.</p>
-                <p class="bold highlight">אם התשובה היא כן, יש לנו מה לדבר..</p>
+                <p>אם התשובה היא לא, או "צריך לבדוק", או "תלוי", הדף הזה לא בשבילך. ואין טעם להמשיך לקרוא.</p>
+                <p class="bold highlight">אם התשובה היא כן, יש לנו מה לדבר.</p>
             </div>
         </div>
     </section>
 
-    <section class="light-bg">
+    <section class="light-bg padded-section">
         <div class="container">
             <h2>למה אנשים נתקעים</h2>
-            <p>לא כי אין להם כסף ולא כי אין הזדמנויות.</p>
+            <p>לא כי אין להם כסף. ולא כי אין הזדמנויות.</p>
             <p>אלא כי הם ראו יותר מדי אנשים חכמים שעשו טעויות יקרות. ראו חברים שקפצו על "הזדמנויות" שהתבררו כהרפתקאות. ראו קרובי משפחה שהאמינו למצגות מבריקות והפסידו כסף.</p>
-            <p>אז הם מחכים, בודקים, משווים, מתייעצים ובסוף לא עושים כלום.<br>
+            <p>אז הם מחכים, בודקים, משווים, מתייעצים. ובסוף לא עושים כלום.<br>
             כי הזהירות שלמדו מניסיון, הפכה לשיתוק שעולה להם בדיוק כמו פזיזות, רק בצורה שקטה יותר.</p>
 
             <h2 style="margin-top: 50px;">אז מה שונה פה?</h2>
-            <p>שום דבר מיוחד חוץ מזה שאנחנו לא מנסים לשכנע אותך.</p>
-            <p>יש פרויקט. יש מספרים. יש חלון זמן ויש תהליך בדיקה שמאפשר לך להחליט אם זה מתאים לך.<br>
-            לא "הזדמנות חד פעמית", לא "עכשיו או לעולם לא". פשוט עסקה שהגיונית למי שמסוגל לזוז.</p>
+            <p>שום דבר מיוחד. חוץ מזה שאנחנו לא מנסים לשכנע אותך.</p>
+            <p>יש פרויקט. יש מספרים. יש חלון זמן. ויש תהליך בדיקה שמאפשר לך להחליט אם זה מתאים לך.<br>
+            לא "הזדמנות חד פעמית". לא "עכשיו או לעולם לא". פשוט עסקה שהגיונית למי שמסוגל לזוז.</p>
         </div>
     </section>
 
-    <section>
+    <section class="padded-section">
         <div class="container text-center">
             <img src="pool_twilight.png" alt="בריכת הפרויקט בשעת בין ערביים" style="max-width: 900px;">
 
             <h2>הפרויקט</h2>
             <p class="bold" style="font-size: 1.3rem;">כפר הים, ליד פאפוס, קפריסין.</p>
-            <p>קומפלקס חדש, בריכה, לובי, חניה פרטית, מפרט אירופי גבוה, ניהול מלא בשטח, אזור עם ביקוש אמיתי לשכירות כל השנה.</p>
+            <p>קומפלקס חדש. בריכה, לובי, חניה פרטית. מפרט אירופי גבוה. ניהול מלא בשטח. אזור עם ביקוש אמיתי לשכירות כל השנה.</p>
 
             <img src="map_location.png" alt="מפת מיקום הפרויקט בפאפוס" style="max-width: 800px; margin-top: 40px;">
         </div>
     </section>
 
-    <section class="light-bg text-center">
+    <section class="light-bg text-center padded-section">
         <div class="container">
             <h2>המספרים</h2>
             <ul class="data-list">
@@ -288,45 +308,45 @@
                 <li>הון עצמי נדרש: <strong>כ-110,000 יורו</strong></li>
                 <li class="super-highlight">דמי שריון דירה, מיידי: <strong>5,000 יורו בלבד</strong></li>
                 <li>שכירות ארוכת טווח: <strong>11,000 עד 14,000 יורו בשנה</strong></li>
-                <li>שכירות קצרה Airbnb: <strong>כ 21,000 עד 26,000 יורו בשנה</strong></li>
+                <li>שכירות קצרה Airbnb: <strong>כ-21,000 עד 26,000 יורו בשנה</strong></li>
                 <li>תפוסה ממוצעת באזור: <strong>61% עד 73%</strong></li>
-                <li>עליית ערך צפויה עם סיום הבניה: <strong>12%</strong></li>
+                <li>עליית ערך צפויה עם סיום הבנייה: <strong>12%</strong></li>
             </ul>
-            <p class="bold" style="margin-top: 30px;">אלו לא הבטחות, אלו מספרים שאפשר לאמת ואם משהו לא מסתדר לך, עדיף שתגלה את זה עכשיו.</p>
+            <p class="bold" style="margin-top: 30px;">אלו לא הבטחות. אלו מספרים שאפשר לאמת. ואם משהו לא מסתדר לך, עדיף שתגלה את זה עכשיו.</p>
         </div>
     </section>
 
-    <section>
-        <div class="container">
+    <section class="padded-section">
+        <div class="container text-center">
             <img src="money_growth.png" alt="הדמיית צמיחת ערך ההשקעה" style="max-width: 800px;">
         </div>
     </section>
 
-    <section class="dark-bg">
+    <section class="dark-bg padded-section">
         <div class="container">
             <div class="audience-grid">
                 <div class="audience-col">
                     <h3>למי זה באמת מתאים</h3>
                     <ul class="check-list">
-                        <li>למי שיש לו הון שעומד ויודע שהוא צריך לזוז</li>
-                        <li>למי שרוצה לגור בחו"ל ומחפש עוגן קרוב למשפחה בישראל</li>
-                        <li>למי שנמאס לו לשלם מחירי שיא על חופשות ורוצה מקום משלו</li>
+                        <li>למי שיש לו הון שעומד ויודע שהוא צריך לזוז.</li>
+                        <li>למי שרוצה לגור בחו"ל ומחפש עוגן קרוב למשפחה בישראל.</li>
+                        <li>למי שנמאס לו לשלם מחירי שיא על חופשות ורוצה מקום משלו.</li>
                     </ul>
                 </div>
                 <div class="audience-col">
                     <h3>למי זה לא מתאים</h3>
                     <ul class="cross-list">
-                        <li>למי שצריך להתייעץ עם עוד עשרה אנשים, לפני שהוא מחליט</li>
-                        <li>למי שמחפש "עוד מידע", במקום לקבל החלטה</li>
-                        <li>למי שההון העצמי שלו לא זמין או לא ברור</li>
-                        <li>למי שרוצה "לחשוב על זה אחרי החגים"</li>
+                        <li>למי שצריך להתייעץ עם עוד עשרה אנשים, לפני שהוא מחליט.</li>
+                        <li>למי שמחפש "עוד מידע", במקום לקבל החלטה.</li>
+                        <li>למי שההון העצמי שלו לא זמין או לא ברור.</li>
+                        <li>למי שרוצה "לחשוב על זה אחרי החגים".</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="light-bg text-center">
+    <section class="light-bg text-center padded-section">
         <div class="container">
             <h2>איך התהליך עובד</h2>
             
@@ -339,29 +359,44 @@
         </div>
     </section>
 
-    <section class="text-center">
+    <section class="text-center padded-section">
         <div class="container">
-            <h2>מי עומד מאחורי זה</h2>
+            <h2>למה טוביה נכנס לעסקה הזו</h2>
             <img src="tovia_circle.png" alt="טוביה מרמרלי" class="tovia-img">
             <p class="bold" style="font-size: 1.3rem;">אני טוביה מרמרלי (הנדלנומטר).</p>
-            <p>מסנן פרויקטים, לא מוכר אותם<br>
-            הפרויקט הזה עבר את הבדיקה שלי ולכן אני מציג אותו<br>
-            אם הוא לא היה עובר, לא היית רואה את הדף הזה</p>
+            <p>מסנן פרויקטים, לא מוכר אותם.</p>
+            <p>30 שנה בנדל"ן. מאות עסקאות. ושם אחד שאנשים מכירים: נדלנומטר.<br>
+            הכינוי הזה לא במקרה. אני מודד פרויקטים לפני שאני מציג אותם. בודק מספרים, מיקום, יזם, תנאי שוק. ורק אם העסקה עוברת את הסינון שלי, היא מגיעה אליך.</p>
+            <p>הפרויקט הזה עבר.<br>
+            לא כי הוא "מושלם". אלא כי המספרים עובדים, המיקום חזק, והתזמון נכון.</p>
+            <p>אני שם את השם שלי על העסקה הזו. וזה אומר משהו. כי אחרי 30 שנה בשוק, השם שלי שווה יותר מכל עמלה.<br>
+            אם הפרויקט לא היה עובר את הבדיקה שלי, לא היית רואה את הדף הזה.</p>
+
+            <div class="video-placeholder-container">
+                <div class="video-placeholder-text">מקום לסרטון (יוטיוב/וימאו)</div>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-placeholder-item">תמונה 1</div>
+                <div class="gallery-placeholder-item">תמונה 2</div>
+                <div class="gallery-placeholder-item">תמונה 3</div>
+                <div class="gallery-placeholder-item">תמונה 4</div>
+            </div>
+
         </div>
     </section>
 
-    <section class="form-section text-center">
+    <section class="form-section text-center padded-section">
         <div class="container">
             <img src="hero_sunset.png" alt="כפר הים בשקיעה" style="max-width: 800px; border-radius: 8px; border: 3px solid var(--accent-gold);">
 
             <h2 style="color: var(--accent-gold); font-size: 3rem; margin-top: 30px;">11 דירות</h2>
-            <p class="bold" style="font-size: 1.5rem;">לא 160. לא 50. רק 11</p>
-            <p>מי שמתאים ומוכן לזוז עכשיו, משאיר פרטים.<br>
-            מי שלא, ממשיך הלאה בלי דרמה.</p>
+            <p class="bold" style="font-size: 1.5rem;">לא 160. לא 50. רק 11.</p>
+            <p>מי שמתאים ומוכן לזוז עכשיו, משאיר פרטים. מי שלא, ממשיך הלאה בלי דרמה.</p>
             
             <div style="margin: 40px 0;">
                 <h3 style="color: var(--accent-gold);">שיחת התאמה להתקדמות</h3>
-                <p>7 דקות. 4 שאלות. אנחנו בודקים התאמה, לא מנסים לשכנע</p>
+                <p>7 דקות. 4 שאלות. אנחנו בודקים התאמה, לא מנסים לשכנע.</p>
             </div>
 
             <div class="form-container">
@@ -414,7 +449,7 @@
                 </form>
             </div>
 
-            <div style="background-color: var(--light-bg); color: var(--text-dark); padding: 40px; border-radius: 8px; margin: 60px auto; max-width: 800px; text-align: right;">
+            <div style="background-color: var(--light-bg); color: var(--text-dark); padding: 40px; border-radius: 8px; margin: 60px auto; max-width: 800px; text-align: right; width: 100%;">
                 <h2 class="text-center" style="color: var(--primary-dark);">שאלות ותשובות</h2>
                 <div class="faq-item">
                     <div class="faq-question">האם ה-5,000 יורו מחייבים אותי?</div>
